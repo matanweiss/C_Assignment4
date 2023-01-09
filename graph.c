@@ -65,13 +65,13 @@ void build_graph_cmd(pnode *head)
     int endVertex = 0;
     int weight = 0;
     char letter = 0;
+    char buffer[64];
     for (size_t i = 0; i < num; i++)
     {
-        scanf("%c", &letter);
+
+        scanf(" %c", &letter);
         scanf("%d", &vertex);
-        printf("%d\n", vertex);
         int result = scanf("%d", &endVertex);
-        printf("%d %d\n", result, endVertex);
         while (result != 0)
         {
             scanf("%d", &weight);
