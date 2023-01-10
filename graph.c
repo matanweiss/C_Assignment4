@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+// #include <unistd.h>
 #include "graph.h"
 
 pnode *createVertices(int num)
@@ -64,6 +65,7 @@ void freeEdges(pnode vertex)
         current = current->next;
         free(temp);
     }
+    vertex->edges = NULL;
 }
 
 void freeGraph(pnode *head)
@@ -128,7 +130,9 @@ void insert_node_cmd(pnode *head, pnode *arr)
     int endVertex = 0;
     int weight = 0;
     scanf("%d", &vertex);
-
+    printf("edges is null: %d\n", (arr[vertex]->edges) == NULL);
+    freeEdges(arr[vertex]);
+    printf("edges is null: %d\n", (arr[vertex]->edges) == NULL);
     while (1)
     {
         result = scanf("%d", &endVertex);
@@ -136,7 +140,8 @@ void insert_node_cmd(pnode *head, pnode *arr)
         {
             break;
         }
-
         result = scanf("%d", &weight);
+        addEdge(arr[vertex], arr[endVertex], weight);
+        printf("added edge from %d to %d\n", vertex, endVertex);
     }
 }

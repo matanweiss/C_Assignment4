@@ -7,8 +7,7 @@ int main()
     char choise = 0;
     pnode head = NULL;
     pnode *arr = NULL;
-    // while (choise != '\n')
-    while (1)
+    while (!('1' <= choise && choise <= '9'))
     {
         switch (choise)
         {
@@ -21,14 +20,12 @@ int main()
         case 'P':
             printGraph(head);
             break;
-        case 'Q':
-            freeGraph(&head);
-            free(arr);
-            return 0;
         default:
             break;
         }
         scanf(" %c", &choise);
     }
+    freeGraph(&head);
+    free(arr);
     return 0;
 }
