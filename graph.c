@@ -47,8 +47,34 @@ void addEdge(pnode vertex, pnode endVertex, int weight)
     vertex->edges = newEdge;
 }
 
+void freeNode(pnode vertex)
+{
+    pedge current = vertex->edges;
+    while (current)
+    {
+        pedge temp = current;
+        current = current->next;
+        free(temp);
+    }
+    free(vertex);
+}
+
+void freeGraph(pnode *head)
+{
+    pnode current = *head;
+    while (current)
+    {
+        pnode temp = current;
+        current = current->next;
+        freeNode(temp);
+    }
+}
+
 void build_graph_cmd(pnode *head)
 {
+
+    // freeGraph(head);
+
     // getting number of vertices
     int num = 0;
     while (num <= 0)
@@ -65,10 +91,8 @@ void build_graph_cmd(pnode *head)
     int endVertex = 0;
     int weight = 0;
     char letter = 0;
-    char buffer[64];
     for (size_t i = 0; i < num; i++)
     {
-
         scanf(" %c", &letter);
         scanf("%d", &vertex);
         int result = scanf("%d", &endVertex);
@@ -81,13 +105,6 @@ void build_graph_cmd(pnode *head)
     }
 
     // free allocated memory
-    for (size_t i = 0; i < num; i++)
-    {
-        printEdges(arr[i]);
-    }
-    for (size_t i = 0; i < num; i++)
-    {
-        free(arr[i]);
-    }
     free(arr);
+    freeGraph(head);
 }
