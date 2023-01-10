@@ -36,6 +36,16 @@ void printEdges(pnode vertex)
     }
 }
 
+void printGraph(pnode head)
+{
+    pnode current = head;
+    while (current)
+    {
+        printEdges(current);
+        current = current->next;
+    }
+}
+
 void addEdge(pnode vertex, pnode endVertex, int weight)
 {
     pedge newEdge = (pedge)malloc(sizeof(edge));
@@ -45,7 +55,7 @@ void addEdge(pnode vertex, pnode endVertex, int weight)
     vertex->edges = newEdge;
 }
 
-void freeNode(pnode vertex)
+void freeEdges(pnode vertex)
 {
     pedge current = vertex->edges;
     while (current)
@@ -54,7 +64,6 @@ void freeNode(pnode vertex)
         current = current->next;
         free(temp);
     }
-    free(vertex);
 }
 
 void freeGraph(pnode *head)
@@ -64,7 +73,8 @@ void freeGraph(pnode *head)
     {
         pnode temp = current;
         current = current->next;
-        freeNode(temp);
+        freeEdges(temp);
+        free(temp);
     }
 }
 
@@ -104,5 +114,8 @@ void build_graph_cmd(pnode *head)
 
     // free allocated memory
     free(arr);
-    return;
+}
+
+void insert_node_cmd(pnode *head)
+{
 }

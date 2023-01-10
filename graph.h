@@ -26,6 +26,8 @@ void deleteGraph_cmd(pnode *head);
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
 void freeGraph(pnode *head);
-void freeNode(pnode vertex);
+void freeEdges(pnode vertex);
+void printGraph(pnode head);
+void printEdges(pnode vertex);
 
 #endif

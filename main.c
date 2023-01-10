@@ -14,6 +14,12 @@ int main()
         case 'A':
             build_graph_cmd(&head);
             break;
+        case 'B':
+            insert_node_cmd(&head);
+            break;
+        case 'P':
+            printGraph(head);
+            break;
         case 'Q':
             freeGraph(&head);
             return 0;
