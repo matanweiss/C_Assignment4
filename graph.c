@@ -32,9 +32,7 @@ void printEdges(pnode vertex)
     while (current)
     {
         printf("endVertex: %d, weight: %d\n", current->endpoint->node_num, current->weight);
-        pedge temp = current;
         current = current->next;
-        free(temp);
     }
 }
 
