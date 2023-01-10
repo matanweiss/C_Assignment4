@@ -78,7 +78,7 @@ void freeGraph(pnode *head)
     }
 }
 
-void build_graph_cmd(pnode *head)
+void build_graph_cmd(pnode *head, pnode **arr)
 {
     // removing current graph
     freeGraph(head);
@@ -91,8 +91,8 @@ void build_graph_cmd(pnode *head)
     }
 
     // creating vertices
-    pnode *arr = createVertices(num);
-    *head = arr[0];
+    *arr = createVertices(num);
+    *head = (*arr)[0];
 
     // getting input
     int vertex = 0;
@@ -107,15 +107,36 @@ void build_graph_cmd(pnode *head)
         while (result != 0)
         {
             scanf("%d", &weight);
-            addEdge(arr[vertex], arr[endVertex], weight);
+            addEdge((*arr)[vertex], (*arr)[endVertex], weight);
             result = scanf("%d", &endVertex);
         }
     }
-
-    // free allocated memory
-    free(arr);
 }
 
-void insert_node_cmd(pnode *head)
+void insert_node_cmd(pnode *head, pnode *arr)
 {
+    // if (!*head)
+    // {
+    //     return;
+    // }
+    // freeEdges(*head);
+    // int vertex = 0;
+    // scanf("%d", &vertex);
+
+    int vertex = 0;
+    int result = 0;
+    int endVertex = 0;
+    int weight = 0;
+    scanf("%d", &vertex);
+
+    while (1)
+    {
+        result = scanf("%d", &endVertex);
+        if (result == 0)
+        {
+            break;
+        }
+
+        result = scanf("%d", &weight);
+    }
 }
