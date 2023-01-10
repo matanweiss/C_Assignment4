@@ -7,7 +7,7 @@ int main()
     char choise = 0;
     pnode head = NULL;
     // while (choise != '\n')
-    while (choise != 'Q')
+    while (1)
     {
         switch (choise)
         {
@@ -15,9 +15,12 @@ int main()
             build_graph_cmd(&head);
             break;
         case 'Q':
+            freeGraph(&head);
             return 0;
+        default:
+            break;
         }
-        scanf("%c", &choise);
+        scanf(" %c", &choise);
     }
     return 0;
 }

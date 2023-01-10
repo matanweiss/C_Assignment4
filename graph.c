@@ -70,8 +70,8 @@ void freeGraph(pnode *head)
 
 void build_graph_cmd(pnode *head)
 {
-
-    // freeGraph(head);
+    // removing current graph
+    freeGraph(head);
 
     // getting number of vertices
     int num = 0;
@@ -104,5 +104,5 @@ void build_graph_cmd(pnode *head)
 
     // free allocated memory
     free(arr);
-    freeGraph(head);
+    return;
 }
