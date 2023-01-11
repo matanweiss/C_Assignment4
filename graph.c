@@ -112,48 +112,57 @@ void build_graph_cmd(pnode *head)
     }
 }
 
-// void insert_node_cmd(pnode *head)
-// {
-//     int vertex = 0;
-//     int result = 0;
-//     int endVertex = 0;
-//     int weight = 0;
-//     scanf("%d", &vertex);
+void insert_node_cmd(pnode *head)
+{
+    int vertex = 0;
+    int result = 0;
+    int endVertex = 0;
+    int weight = 0;
+    scanf("%d", &vertex);
 
-//     // add vertex if it doesn't exist
-//     if (!arr[vertex])
-//     {
-//         arr[vertex] = (pnode)malloc(sizeof(node));
-//         arr[vertex]->node_num = vertex - 1;
-//         arr[vertex]->edges = NULL;
-//         arr[vertex]->next = NULL;
-//         if (vertex + 1 < size)
-//         {
-//             arr[vertex]->next = arr[vertex + 1];
-//         }
-//         if (vertex == 0)
-//         {
-//             *head = arr[vertex];
-//             return;
-//         }
-//         arr[vertex - 1]->next = arr[vertex];
-//     }
+    // finding the vertex
+    pnode current = *head;
+    while (current)
+    {
+        if (current->node_num == vertex)
+        {
+            break;
+        }
+        current = current->next;
+    }
 
-//     freeEdges(arr[vertex]);
+    // add vertex if it doesn't exist
+    if (!current)
+    {
+        current = (pnode)malloc(sizeof(node));
+        current->node_num = vertex;
+        current->edges = NULL;
+        current->next = *head;
+        *head = current;
+    }
 
-//     // getting input and creating edges
-//     while (1)
-//     {
-//         result = scanf("%d", &endVertex);
-//         if (result == 0)
-//         {
-//             break;
-//         }
-//         result = scanf("%d", &weight);
-//         addEdge(arr[vertex], arr[endVertex], weight);
-//         printf("added edge from %d to %d\n", vertex, endVertex);
-//     }
-// }
+    freeEdges(current);
+
+    // getting input and creating edges
+    while (1)
+    {
+        result = scanf("%d", &endVertex);
+        if (result == 0)
+        {
+            break;
+        }
+        result = scanf("%d", &weight);
+        pnode current2 = *head;
+        while (current2)
+        {
+            if (current2->node_num == endVertex)
+            {
+                addEdge(current, current2, weight);
+            }
+            current2 = current2->next;
+        }
+    }
+}
 
 // void delete_node_cmd(pnode *head, pnode *arr)
 // {

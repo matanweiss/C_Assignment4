@@ -14,7 +14,7 @@ int main()
             build_graph_cmd(&head);
             break;
         case 'B':
-            // insert_node_cmd(&head);
+            insert_node_cmd(&head);
             break;
         case 'P':
             printGraph(head);
