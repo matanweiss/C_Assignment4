@@ -80,28 +80,25 @@ void freeGraph(pnode *head)
     }
 }
 
-void build_graph_cmd(pnode *head, pnode **arr, int *size)
+void build_graph_cmd(pnode *head)
 {
     // removing current graph and array
     freeGraph(head);
-    if (*arr != NULL)
-    {
-        free(*arr);
-    }
 
     // getting number of vertices
-    scanf("%d", size);
+    int size = 0;
+    scanf("%d", &size);
 
     // creating vertices
-    *arr = createVertices(*size);
-    *head = (*arr)[0];
+    pnode *arr = createVertices(size);
+    *head = arr[0];
 
     // getting input and creating edges
     int vertex = 0;
     int endVertex = 0;
     int weight = 0;
     char letter = 0;
-    for (size_t i = 0; i < *size; i++)
+    for (size_t i = 0; i < size; i++)
     {
         scanf(" %c", &letter);
         scanf("%d", &vertex);
@@ -109,93 +106,93 @@ void build_graph_cmd(pnode *head, pnode **arr, int *size)
         while (result != 0)
         {
             scanf("%d", &weight);
-            addEdge((*arr)[vertex], (*arr)[endVertex], weight);
+            addEdge(arr[vertex], arr[endVertex], weight);
             result = scanf("%d", &endVertex);
         }
     }
 }
 
-void insert_node_cmd(pnode *head, pnode *arr, int size)
-{
-    int vertex = 0;
-    int result = 0;
-    int endVertex = 0;
-    int weight = 0;
-    scanf("%d", &vertex);
+// void insert_node_cmd(pnode *head)
+// {
+//     int vertex = 0;
+//     int result = 0;
+//     int endVertex = 0;
+//     int weight = 0;
+//     scanf("%d", &vertex);
 
-    // add vertex if it doesn't exist
-    if (!arr[vertex])
-    {
-        arr[vertex] = (pnode)malloc(sizeof(node));
-        arr[vertex]->node_num = vertex - 1;
-        arr[vertex]->edges = NULL;
-        arr[vertex]->next = NULL;
-        if (vertex + 1 < size)
-        {
-            arr[vertex]->next = arr[vertex + 1];
-        }
-        if (vertex == 0)
-        {
-            *head = arr[vertex];
-            return;
-        }
-        arr[vertex - 1]->next = arr[vertex];
-    }
+//     // add vertex if it doesn't exist
+//     if (!arr[vertex])
+//     {
+//         arr[vertex] = (pnode)malloc(sizeof(node));
+//         arr[vertex]->node_num = vertex - 1;
+//         arr[vertex]->edges = NULL;
+//         arr[vertex]->next = NULL;
+//         if (vertex + 1 < size)
+//         {
+//             arr[vertex]->next = arr[vertex + 1];
+//         }
+//         if (vertex == 0)
+//         {
+//             *head = arr[vertex];
+//             return;
+//         }
+//         arr[vertex - 1]->next = arr[vertex];
+//     }
 
-    freeEdges(arr[vertex]);
+//     freeEdges(arr[vertex]);
 
-    // getting input and creating edges
-    while (1)
-    {
-        result = scanf("%d", &endVertex);
-        if (result == 0)
-        {
-            break;
-        }
-        result = scanf("%d", &weight);
-        addEdge(arr[vertex], arr[endVertex], weight);
-        printf("added edge from %d to %d\n", vertex, endVertex);
-    }
-}
+//     // getting input and creating edges
+//     while (1)
+//     {
+//         result = scanf("%d", &endVertex);
+//         if (result == 0)
+//         {
+//             break;
+//         }
+//         result = scanf("%d", &weight);
+//         addEdge(arr[vertex], arr[endVertex], weight);
+//         printf("added edge from %d to %d\n", vertex, endVertex);
+//     }
+// }
 
-void delete_node_cmd(pnode *head, pnode *arr)
-{
-    int vertex = 0;
-    scanf("%d", &vertex);
-    if (!arr[vertex])
-    {
-        return;
-    }
+// void delete_node_cmd(pnode *head, pnode *arr)
+// {
+//     int vertex = 0;
+//     scanf("%d", &vertex);
+//     if (!arr[vertex])
+//     {
+//         return;
+//     }
 
-    // removing edges to vertex
-    pnode currentVertex = *head;
-    while (currentVertex)
-    {
-        pedge currentEdge = currentVertex->edges;
-        pedge prev = NULL;
-        if (currentEdge && currentEdge->endpoint == arr[vertex])
-        {
-            currentVertex->edges = currentEdge->next;
-        }
-        while (currentEdge)
-        {
-            if (currentEdge->endpoint == arr[vertex])
-            {
-                prev->next = prev->next->next;
-            }
-            prev = currentEdge;
-            currentEdge = currentEdge->next;
-        }
-        currentVertex = currentVertex->next;
-    }
+//     // removing edges to vertex
+//     pnode currentVertex = *head;
+//     while (currentVertex)
+//     {
+//         pedge currentEdge = currentVertex->edges;
+//         pedge prev = NULL;
+//         if (currentEdge && currentEdge->endpoint == arr[vertex])
+//         {
+//             currentVertex->edges = currentEdge->next;
+//         }
+//         while (currentEdge)
+//         {
+//             if (currentEdge->endpoint == arr[vertex])
+//             {
+//                 prev->next = prev->next->next;
+//             }
+//             prev = currentEdge;
+//             currentEdge = currentEdge->next;
+//         }
+//         currentVertex = currentVertex->next;
+//     }
 
-    // removing head
-    if (vertex == 0)
-    {
-        pnode temp = *head;
-        *head = (*head)->next;
-        freeEdges(temp);
-        free(temp);
-        return;
-    }
-}
+//     // removing head
+//     if (vertex == 0)
+//     {
+//         pnode temp = *head;
+//         *head = (*head)->next;
+//         freeEdges(temp);
+//         free(temp);
+//         return;
+//     }
+// }

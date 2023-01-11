@@ -5,18 +5,16 @@
 int main()
 {
     char choise = 0;
-    int size = 0;
     pnode head = NULL;
-    pnode *arr = NULL;
     while (!('1' <= choise && choise <= '9'))
     {
         switch (choise)
         {
         case 'A':
-            build_graph_cmd(&head, &arr, &size);
+            build_graph_cmd(&head);
             break;
         case 'B':
-            insert_node_cmd(&head, arr, size);
+            // insert_node_cmd(&head);
             break;
         case 'P':
             printGraph(head);
@@ -27,6 +25,5 @@ int main()
         scanf(" %c", &choise);
     }
     freeGraph(&head);
-    free(arr);
     return 0;
 }
