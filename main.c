@@ -5,6 +5,7 @@
 int main()
 {
     char choise = 0;
+    int size = 0;
     pnode head = NULL;
     pnode *arr = NULL;
     while (!('1' <= choise && choise <= '9'))
@@ -12,10 +13,10 @@ int main()
         switch (choise)
         {
         case 'A':
-            build_graph_cmd(&head, &arr);
+            build_graph_cmd(&head, &arr, &size);
             break;
         case 'B':
-            insert_node_cmd(&head, arr);
+            insert_node_cmd(&head, arr, size);
             break;
         case 'P':
             printGraph(head);
