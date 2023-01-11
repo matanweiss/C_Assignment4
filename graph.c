@@ -109,6 +109,7 @@ void build_graph_cmd(pnode *head)
             result = scanf("%d", &endVertex);
         }
     }
+    free(arr);
 }
 
 void insert_node_cmd(pnode *head)
@@ -165,7 +166,6 @@ void insert_node_cmd(pnode *head)
 
 void delete_node_cmd(pnode *head)
 {
-
     // getting vertex number
     int vertexNum = 0;
     scanf("%d", &vertexNum);
@@ -192,8 +192,6 @@ void delete_node_cmd(pnode *head)
     pnode currentVertex = *head;
     while (currentVertex)
     {
-        printf("%d\n", currentVertex->node_num);
-
         pedge currentEdge = currentVertex->edges;
         pedge prevEdge = NULL;
         while (currentEdge)
@@ -223,6 +221,7 @@ void delete_node_cmd(pnode *head)
     }
 
     // removing the vertex
+
     // if the vertex is first
     if (!prev)
     {
