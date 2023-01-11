@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <unistd.h>
 #include "graph.h"
 
 pnode *createVertices(int num)
@@ -162,6 +161,80 @@ void insert_node_cmd(pnode *head)
             current2 = current2->next;
         }
     }
+}
+
+void delete_node_cmd(pnode *head)
+{
+
+    // getting vertex number
+    int vertexNum = 0;
+    scanf("%d", &vertexNum);
+
+    // finding vertex
+    pnode vertex = *head;
+    pnode prev = NULL;
+    while (vertex)
+    {
+        if (vertex->node_num == vertexNum)
+        {
+            break;
+        }
+        prev = vertex;
+        vertex = vertex->next;
+    }
+
+    if (!vertex)
+    {
+        return;
+    }
+
+    // removing edges to vertex
+    pnode currentVertex = *head;
+    while (currentVertex)
+    {
+        printf("%d\n", currentVertex->node_num);
+
+        pedge currentEdge = currentVertex->edges;
+        pedge prevEdge = NULL;
+        while (currentEdge)
+        {
+            // edge has to be removed
+            if (currentEdge->endpoint == vertex)
+            {
+                // the edge is first, set first edge to its next
+                if (!prevEdge)
+                {
+                    currentVertex->edges = currentEdge->next;
+                }
+
+                // the edge is not first, skip the edge
+                else
+                {
+                    prevEdge->next = currentEdge->next;
+                }
+                free(currentEdge);
+
+                // there is no more than one edge from currentVertex to vertex
+                break;
+            }
+            currentEdge = currentEdge->next;
+        }
+        currentVertex = currentVertex->next;
+    }
+
+    // removing the vertex
+    // if the vertex is first
+    if (!prev)
+    {
+        *head = vertex->next;
+    }
+
+    // skip the vertex
+    else
+    {
+        prev->next = vertex->next;
+    }
+    free(vertex);
 }
 
 // void delete_node_cmd(pnode *head, pnode *arr)

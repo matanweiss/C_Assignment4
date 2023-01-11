@@ -16,6 +16,9 @@ int main()
         case 'B':
             insert_node_cmd(&head);
             break;
+        case 'D':
+            delete_node_cmd(&head);
+            break;
         case 'P':
             printGraph(head);
             break;
