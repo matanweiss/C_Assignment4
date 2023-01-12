@@ -235,3 +235,69 @@ void delete_node_cmd(pnode *head)
     }
     free(vertex);
 }
+
+pnode findMinNotVisited(pnode head)
+{
+    int min = __INT_MAX__;
+    pnode result = NULL;
+    while (head)
+    {
+        if (!head->visited && head->dist < min)
+        {
+            min = head->dist;
+            result = head;
+        }
+        head = head->next;
+    }
+    return result;
+}
+
+void shortsPath_cmd(pnode head)
+{
+    int sourceNum = 0;
+    int destNum = 0;
+    pnode source = NULL;
+    pnode dest = NULL;
+    scanf("%d", &sourceNum);
+    scanf("%d", &destNum);
+    pnode current = head;
+
+    // finding both vertices and resetting values
+    while (current)
+    {
+        current->dist = __INT_MAX__;
+        current->visited = 0;
+        if (current->node_num == sourceNum)
+        {
+            source = current;
+            source->dist = 0;
+        }
+        else if (current->node_num == destNum)
+        {
+            dest = current;
+        }
+        current = current->next;
+    }
+
+    // running dijkstra's algorithm
+    current = findMinNotVisited(head);
+    while (current)
+    {
+        current->visited = 1;
+        pedge currentEdge = current->edges;
+        while (currentEdge)
+        {
+            if (!currentEdge->endpoint->visited && current->dist + currentEdge->weight < currentEdge->endpoint->dist)
+            {
+                currentEdge->endpoint->dist = current->dist + currentEdge->weight;
+            }
+            currentEdge = currentEdge->next;
+        }
+        current = findMinNotVisited(head);
+    }
+    if (dest->dist == __INT_MAX__)
+    {
+        dest->dist = -1;
+    }
+    printf("dijkstra result: %d\n", dest->dist);
+}

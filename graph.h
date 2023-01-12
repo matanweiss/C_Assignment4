@@ -16,6 +16,8 @@ typedef struct GRAPH_NODE_
     int node_num;
     pedge edges;
     struct GRAPH_NODE_ *next;
+    int dist;
+    int visited;
 } node, *pnode;
 
 void build_graph_cmd(pnode *head);

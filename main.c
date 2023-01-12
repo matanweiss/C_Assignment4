@@ -6,7 +6,7 @@ int main()
 {
     char choise = 0;
     pnode head = NULL;
-    while (!('1' <= choise && choise <= '9'))
+    while (!feof(stdin))
     {
         switch (choise)
         {
@@ -18,6 +18,9 @@ int main()
             break;
         case 'D':
             delete_node_cmd(&head);
+            break;
+        case 'S':
+            shortsPath_cmd(head);
             break;
         case 'P':
             printGraph(head);
