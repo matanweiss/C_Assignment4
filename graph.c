@@ -88,6 +88,12 @@ void build_graph_cmd(pnode *head)
     int size = 0;
     scanf("%d", &size);
 
+    // do nothing
+    if (size == 0)
+    {
+        return;
+    }
+
     // creating vertices
     pnode *arr = createVertices(size);
     *head = arr[0];
@@ -252,14 +258,10 @@ pnode findMinNotVisited(pnode head)
     return result;
 }
 
-void shortsPath_cmd(pnode head)
+int shortsPath_cmd(pnode head, int sourceNum, int destNum)
 {
-    int sourceNum = 0;
-    int destNum = 0;
     pnode source = NULL;
     pnode dest = NULL;
-    scanf("%d", &sourceNum);
-    scanf("%d", &destNum);
     pnode current = head;
 
     // finding both vertices and resetting values
@@ -299,5 +301,68 @@ void shortsPath_cmd(pnode head)
     {
         dest->dist = -1;
     }
-    printf("dijkstra result: %d\n", dest->dist);
+    return dest->dist;
+}
+
+void swap(int *nums, int num1, int num2)
+{
+    int temp = nums[num1];
+    nums[num1] = nums[num2];
+    nums[num2] = temp;
+}
+
+void check(pnode head, int *arr, int k, int curr, int *result)
+{
+    // if there are only two vertices
+    if (k == 2)
+    {
+        int dist = shortsPath_cmd(head, arr[0], arr[1]);
+        if (dist != -1 && (curr + dist) < *result)
+        {
+            *result = (curr + dist);
+        }
+        return;
+    }
+
+    // check other paths recursively
+    for (int i = 1; i < k; i++)
+    {
+        swap(arr, 1, i);
+        int dist = shortsPath_cmd(head, arr[0], arr[1]);
+        if (dist == -1)
+        {
+            return;
+        }
+        check(head, arr + 1, k - 1, curr + dist, result);
+        swap(arr, i, 1);
+    }
+}
+
+void TSP_cmd(pnode head)
+{
+    // getting input and inserting number to an array
+    int k;
+    scanf("%d", &k);
+    int *nums = (int *)(malloc(sizeof(int) * k));
+    int result = __INT_MAX__;
+    for (int i = 0; i < k; i++)
+    {
+        scanf("%d", &nums[i]);
+    }
+
+    // checking every possible vertex to start from
+    for (int i = 0; i < k; i++)
+    {
+        swap(nums, 0, i);
+        check(head, nums, k, 0, &result);
+        swap(nums, i, 0);
+        printf("result: %d\n", result);
+    }
+
+    if (result == __INT_MAX__)
+    {
+        result = -1;
+    }
+    free(nums);
+    printf("TSP shortest path: %d\n", result);
 }

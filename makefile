@@ -1,4 +1,7 @@
-all: main
+all: graph
 
-main: main.c graph.c graph.h
-	gcc -Wall -g -o main main.c graph.c
+graph: main.c graph.c graph.h
+	gcc -Wall -g -o graph main.c graph.c
+
+clean:
+	rm -rf graph
