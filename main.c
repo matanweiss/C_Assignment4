@@ -26,7 +26,7 @@ int main()
             scanf("%d", &sourceNum);
             scanf("%d", &destNum);
             result = shortsPath_cmd(head, sourceNum, destNum);
-            printf("dijkstra result: %d\n", result);
+            printf("Dijsktra shortest path: %d\n", result);
             break;
         case 'P':
             printGraph(head);
