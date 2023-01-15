@@ -376,5 +376,5 @@ void TSP_cmd(pnode head)
         result = -1;
     }
     free(nums);
-    printf("TSP shortest path: %d\n", result);
+    printf("TSP shortest path: %d \n", result);
 }
