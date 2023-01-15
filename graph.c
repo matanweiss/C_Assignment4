@@ -326,7 +326,6 @@ void printArray(int *arr, int k)
 
 void check(pnode head, int *arr, int k, int curr, int *result)
 {
-    printArray(arr, k);
     // if there are only two vertices
     if (k == 2)
     {
@@ -370,7 +369,6 @@ void TSP_cmd(pnode head)
         swap(nums, 0, i);
         check(head, nums, k, 0, &result);
         swap(nums, i, 0);
-        printf("result: %d\n", result);
     }
 
     if (result == __INT_MAX__)
