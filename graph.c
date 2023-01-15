@@ -38,12 +38,14 @@ void printEdges(pnode vertex)
 
 void printGraph(pnode head)
 {
+    printf("\n");
     pnode current = head;
     while (current)
     {
         printEdges(current);
         current = current->next;
     }
+    printf("\n");
 }
 
 void addEdge(pnode vertex, pnode endVertex, int weight)
@@ -221,6 +223,7 @@ void delete_node_cmd(pnode *head)
                 // there is no more than one edge from currentVertex to vertex
                 break;
             }
+            prevEdge = currentEdge;
             currentEdge = currentEdge->next;
         }
         currentVertex = currentVertex->next;
@@ -311,8 +314,19 @@ void swap(int *nums, int num1, int num2)
     nums[num2] = temp;
 }
 
+void printArray(int *arr, int k)
+{
+    printf("[%d", *arr);
+    for (size_t i = 1; i < k; i++)
+    {
+        printf(", %d", *(arr + i));
+    }
+    printf("]\n");
+}
+
 void check(pnode head, int *arr, int k, int curr, int *result)
 {
+    printArray(arr, k);
     // if there are only two vertices
     if (k == 2)
     {
