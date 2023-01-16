@@ -242,6 +242,7 @@ void delete_node_cmd(pnode *head)
     {
         prev->next = vertex->next;
     }
+    freeEdges(vertex);
     free(vertex);
 }
 
