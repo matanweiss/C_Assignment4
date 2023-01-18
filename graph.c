@@ -110,7 +110,7 @@ void build_graph_cmd(pnode *head)
         scanf(" %c", &letter);
         scanf("%d", &vertex);
         int result = scanf("%d", &endVertex);
-        while (result != 0)
+        while (result != 0 && !feof(stdin))
         {
             scanf("%d", &weight);
             addEdge(arr[vertex], arr[endVertex], weight);
